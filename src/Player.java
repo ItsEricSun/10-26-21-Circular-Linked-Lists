@@ -15,6 +15,10 @@ public class Player {
 	public String toString() {
 		return name;
 	}
+	
+	public boolean equals(String name) {
+		return this.name.equalsIgnoreCase(name);
+	}
 
 	public String getName() {
 		return name;
@@ -33,7 +37,7 @@ public class Player {
 	}
 	
 	public void addSingles() {
-		singles = singles++;
+		singles++;
 	}
 
 	public int getDoubles() {
@@ -45,7 +49,7 @@ public class Player {
 	}
 	
 	public void addDoubles() {
-		doubles = doubles++;
+		doubles++;
 	}
 
 	public int getTriples() {
@@ -57,7 +61,7 @@ public class Player {
 	}
 	
 	public void addTriples() {
-		triples = triples++;
+		triples++;
 	}
 
 	public int getHomeruns() {
@@ -69,7 +73,7 @@ public class Player {
 	}
 	
 	public void addHomeruns() {
-		homeruns = homeruns++;
+		homeruns++;
 	}
 
 	public int getWalks() {
@@ -81,7 +85,7 @@ public class Player {
 	}
 	
 	public void adWalks() {
-		walks = walks++;
+		walks++;
 	}
 
 	public int getOuts() {
@@ -93,6 +97,6 @@ public class Player {
 	}
 	
 	public void addOuts() {
-		outs = outs++;
+		outs++;
 	}
 }
