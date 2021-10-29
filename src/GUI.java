@@ -10,14 +10,19 @@ public class GUI extends GBFrame {
 	LinkedList<Player> awayReserve = new LinkedList<>();
 	CircularLinkedList<Player> homeBatting = new CircularLinkedList<>();
 	CircularLinkedList<Player> awayBatting = new CircularLinkedList<>();
+	String[] field = new String[] {"a", "b", "c", "eeeee"};
 	
 //	DoublyLinkedList<Employee> employees = new DoublyLinkedList<>();
 //	ListIterator<Employee> it = employees.iterator();
 //	ListIterator<Employee> itEdit = employees.iterator();
-//	JTextArea outputArea;
+	JTextArea outputArea;
 	JButton setRuleButton;
 	JButton addHomeReserveButton;
 	JButton addHomeBattingButton;
+	JButton addAwayReserveButton;
+	JButton addAwayBattingButton;
+	JButton batButton;
+	JButton replaceButton;
 //	JButton removeButton;
 //	JButton editButton;
 //	JButton sortNameButton;
@@ -31,12 +36,17 @@ public class GUI extends GBFrame {
 //	JTextField departmentField;
 	IntegerField reserveAmountField;
 	IntegerField battingAmountField;
+	IntegerField inningAmountField;
 	JTextField nameField;
 
 	int reserveH;
 	int battingH;
 	int reserveA;
 	int battingA;
+	int innings;
+	int homeScore;
+	int awayScore;
+	int inning;
 	
 	static boolean adding = true;
 //	Employee temp;
@@ -46,7 +56,8 @@ public class GUI extends GBFrame {
 		reserveAmountField = addIntegerField(2, 1,2,1,1);
 		JLabel battingAmountLabel = addLabel("Max Batting Player List Size (2-9)", 2,1,1,1);
 		battingAmountField = addIntegerField(2, 2,2,1,1);
-		
+		JLabel inningAmountLabel = addLabel("Innings (2-9)", 3,1,1,1);
+		inningAmountField = addIntegerField(2, 3,2,1,1);
 //		outputArea = addTextArea("", 1, 1, 1, 6);
 		setRuleButton = addButton("Set", 3,1,2,1);
 //		removeButton = addButton("Remove Employee", 8,1,1,1);
@@ -76,6 +87,53 @@ public class GUI extends GBFrame {
 		JLabel nameLabel = addLabel("Name", 2,1,1,1);
 		nameField = addTextField("", 2,2,1,1);
 		addHomeBattingButton = addButton("Add", 3,1,2,1);
+		frm.validate();
+	}
+	
+	public void addAwayReserve() {
+		frm.getContentPane().removeAll();
+		frm.setSize(300, 250);
+		frm.setTitle("Away Team Reserve Player Add");
+		frm.repaint();
+		JLabel title = addLabel("Away Team Reserve Player (Space Left: " + reserveA + ")", 1,1,2,1);
+		JLabel nameLabel = addLabel("Name", 2,1,1,1);
+		nameField = addTextField("", 2,2,1,1);
+		addAwayReserveButton = addButton("Add", 3,1,2,1);
+		frm.validate();
+	}
+	
+	public void addAwayBatting() {
+		frm.getContentPane().removeAll();
+		frm.setSize(300, 250);
+		frm.setTitle("Away Team Batting Player Add");
+		frm.repaint();
+		JLabel title = addLabel("Away Team Batting Player (Space Left: " + battingA + ")", 1,1,2,1);
+		JLabel nameLabel = addLabel("Name", 2,1,1,1);
+		nameField = addTextField("", 2,2,1,1);
+		addAwayBattingButton = addButton("Add", 3,1,2,1);
+		frm.validate();
+	}
+	
+	public void field() {
+		frm.getContentPane().removeAll();
+		frm.setSize(750, 750);
+		frm.setTitle("Baseball Field");
+		frm.repaint();
+		JLabel homeScoreLabel = addLabel("Home Score: " + homeScore, 1,1,2,1);
+		JLabel awarScoreLabel = addLabel("Away Score: " + awayScore, 1,2,2,1);
+		JLabel inningLabel = addLabel("Inning: " + inning, 1,3,2,1);
+		JLabel spaceLabel = addLabel("", 2,1,1,1);
+		JLabel homeBaseLabel = addLabel("Batting/Home Base", 3,1,1,1);
+		JLabel firstBaseLabel = addLabel("First Base", 3,2,1,1);
+		JLabel secondbaseLabel = addLabel("Second Base", 3,3,1,1);
+		JLabel thirdBaseLabel = addLabel("Third Base", 3,4,1,1);
+		JLabel homeBasePersonLabel = addLabel(field[0], 4,1,1,1);
+		JLabel firstBasePersonLabel = addLabel(field[1], 4,2,1,1);
+		JLabel secondbasePersonLabel = addLabel(field[2], 4,3,1,1);
+		JLabel thirdBasePersonLabel = addLabel(field[3], 4,4,1,1);
+		JLabel personBattingLabel = addLabel("Batting: " + field[0], 5,1,1,1);
+		batButton = addButton("Bat", 5,2,1,1);
+		replaceButton = addButton("Replace", 5,3,1,1);
 		frm.validate();
 	}
 
@@ -158,11 +216,16 @@ public class GUI extends GBFrame {
 		if(buttonObj == setRuleButton) {
 			int r = reserveAmountField.getNumber();
 			int b = battingAmountField.getNumber();
+			int i = inningAmountField.getNumber();
 			if(!reserveAmountField.isValid()) {
 				messageBox("Error: Please Make Sure Reserve Amount is a Number");
 				return;
 			} 
 			if(!battingAmountField.isValid()) {
+				messageBox("Error: Please Make Sure Batting Amount is a Number");
+				return;
+			} 
+			if(!inningAmountField.isValid()) {
 				messageBox("Error: Please Make Sure Batting Amount is a Number");
 				return;
 			} 
@@ -174,11 +237,17 @@ public class GUI extends GBFrame {
 				messageBox("Error: Please Make Sure Reserve Amount is between 2 and 9");
 				return;
 			}
+			if(i < 2 || i > 9) {
+				messageBox("Error: Please Make Sure Inning Count is between 2 and 9");
+				return;
+			}
 			reserveH = r;
 			reserveA = r;
 			battingH = b;
 			battingA = b;
+			innings = i;
 			addHomeReserve();
+			field();
 			return;
 		} 
 		else if(buttonObj == addHomeReserveButton) {
@@ -195,10 +264,30 @@ public class GUI extends GBFrame {
 			homeReserve.add(new Player(nameField.getText()));
 			battingH--;
 			if(battingH == 0) {
-//				addHomeBatting();
+				addAwayReserve();
 				return;
 			}
 			addHomeBatting();
+			return;
+		} 
+		else if(buttonObj == addAwayReserveButton) {
+			awayReserve.add(new Player(nameField.getText()));
+			reserveA--;
+			if(reserveA == 0) {
+				addAwayBatting();
+				return;
+			}
+			addAwayReserve();
+			return;
+		} 
+		else if(buttonObj == addAwayBattingButton) {
+			awayReserve.add(new Player(nameField.getText()));
+			battingA--;
+			if(battingA == 0) {
+				field();
+				return;
+			}
+			addAwayBatting();
 			return;
 		} 
 //		else if(buttonObj == removeButton) {
