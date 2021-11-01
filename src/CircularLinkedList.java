@@ -13,6 +13,10 @@ public class CircularLinkedList<E> {
 			data = d;
 			this.next = next;
 		}
+		
+		E getData() {
+			return data;
+		}
 	}
 	
 	public void add(E data){
@@ -33,6 +37,10 @@ public class CircularLinkedList<E> {
 	
 	public Node<E> getCur() {
 		return cur;
+	}
+	
+	public E getCurData() {
+		return cur.data;
 	}
 	
 	public void setCur(E data) {
@@ -71,11 +79,12 @@ public class CircularLinkedList<E> {
 	public static void main(String[] args) {
 		CircularLinkedList<Player> l = new CircularLinkedList<>();
 		l.add(new Player("A"));
-		l.printList();
+//		System.out.println(l.getCur());
+//		l.printList();
 		l.add(new Player("C"));
 		l.add(new Player("B"));
-		l.printList();
-		
-		
+		l.next();
+		System.out.println(l.getCurData().toString());
+//		l.printList();
 	}
 }
