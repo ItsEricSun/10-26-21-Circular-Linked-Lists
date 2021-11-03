@@ -24,6 +24,8 @@ public class GUI extends GBFrame {
 	JButton addAwayBattingButton;
 	JButton awayBatButton;
 	JButton awayReplaceButton;
+	JButton homeBatButton;
+	JButton homeReplaceButton;
 //	JButton removeButton;
 //	JButton editButton;
 //	JButton sortNameButton;
@@ -47,7 +49,7 @@ public class GUI extends GBFrame {
 	int innings;
 	int homeScore;
 	int awayScore;
-	int inning;
+	int inning = 1;
 	int awayOuts;
 	int homeOuts;
 	Random rand = new Random();
@@ -126,7 +128,7 @@ public class GUI extends GBFrame {
 		awayOuts = 0;
 		field = new String[] {awayBatting.getCurData().toString(), "", "", ""};
 		JLabel homeScoreLabel = addLabel("Home Score: " + homeScore, 1,1,2,1);
-		JLabel awarScoreLabel = addLabel("Away Score: " + awayScore, 1,2,2,1);
+		JLabel awayScoreLabel = addLabel("Away Score: " + awayScore, 1,2,2,1);
 		JLabel inningLabel = addLabel("Inning: " + inning, 1,3,2,1);
 		JLabel outsLabel = addLabel("Outs: " + awayOuts, 1,4,2,1);
 		JLabel spaceLabel = addLabel("", 2,1,1,1);
@@ -151,7 +153,7 @@ public class GUI extends GBFrame {
 		frm.setTitle("Baseball Field Away Batting");
 		frm.repaint();
 		JLabel homeScoreLabel = addLabel("Home Score: " + homeScore, 1,1,2,1);
-		JLabel awarScoreLabel = addLabel("Away Score: " + awayScore, 1,2,2,1);
+		JLabel awayScoreLabel = addLabel("Away Score: " + awayScore, 1,2,2,1);
 		JLabel inningLabel = addLabel("Inning: " + inning, 1,3,2,1);
 		JLabel outsLabel = addLabel("Outs: " + awayOuts, 1,4,2,1);
 		JLabel spaceLabel = addLabel("", 2,1,1,1);
@@ -169,74 +171,67 @@ public class GUI extends GBFrame {
 		JLabel reservesLabel = addLabel("Reserves Amount: " + awayReserve.size() + " Player(s)", 5,4,1,1);
 		frm.validate();
 	}
-
-//	public void addMenu() {
-//		frm.getContentPane().removeAll();
-//		frm.setSize(250, 750);
-//		frm.repaint();
-//		outputArea = addTextArea("", 1, 1, 2, 6);
-//		JLabel nameLabel = addLabel("Name", 7,1,1,1);
-//		nameField = addTextField("", 7,2,1,1);
-//		JLabel departmentLabel = addLabel("Department", 8,1,1,1);
-//		departmentField = addTextField("", 8,2,1,1);
-//		JLabel salaryLabel = addLabel("Salary", 9,1,1,1);
-//		salaryField = addIntegerField(0, 9,2,1,1);
-//		backButton = addButton("Back", 11,1,1,1);
-//		addEmployeeButton = addButton("Add Employee", 11,2,1,1);
-//		frm.validate();
-//		updateList();
-//	}
-
-//	public void removeMenu() {
-//		frm.getContentPane().removeAll();
-//		frm.setSize(250, 750);
-//		frm.repaint();
-//		outputArea = addTextArea("", 1, 1, 2, 6);
-//		JLabel nameLabel = addLabel("Name", 7,1,1,1);
-//		nameField = addTextField("", 7,2,1,1);
-//		backButton = addButton("Back", 8,1,1,1);
-//		removeEmployeeButton = addButton("Remove Employee", 8,2,1,1);
-//		frm.validate();
-//		updateList();
-//	}
-
-//	public void editMenu() {
-//		frm.getContentPane().removeAll();
-//		frm.setSize(250, 750);
-//		frm.repaint();
-//		outputArea = addTextArea("", 1, 1, 2, 6);
-//		JLabel nameLabel = addLabel("Name", 7,1,1,1);
-//		nameField = addTextField("", 7,2,1,1);
-//		backButton = addButton("Back", 8,1,1,1);
-//		editInfoButton = addButton("Edit Employee", 8,2,1,1);
-//		frm.validate();
-//		updateList();
-//	}
-
-//	public void editEmployeeMenu(Employee s) {
-//		frm.getContentPane().removeAll();
-//		frm.setSize(250, 750);
-//		frm.repaint();
-//		outputArea = addTextArea("", 1, 1, 2, 6);
-//		JLabel nameLabel = addLabel("Name", 7,1,1,1);
-//		nameField = addTextField(s.getName(), 7,2,1,1);
-//		JLabel departmentLabel = addLabel("Department", 8,1,1,1);
-//		departmentField = addTextField(s.getDepartment(), 8,2,1,1);
-//		JLabel salaryLabel = addLabel("Salary", 9,1,1,1);
-//		salaryField = addIntegerField(s.getSalary(), 9,2,1,1);
-//		backEditButton = addButton("Back", 11,1,1,1);
-//		editEmployeeButton = addButton("Edit Employee", 11,2,1,1);
-//		frm.validate();
-//		updateList();
-//	}
+	
+	public void replaceAwayPlayer() {
+		outputArea = addTextArea("", 1, 1, 1, 6);
+		outputArea.append
+	}
+	
+	public void homeField() {
+		frm.getContentPane().removeAll();
+		frm.setSize(750, 750);
+		frm.setTitle("Baseball Field Home Batting");
+		frm.repaint();
+		homeOuts = 0;
+		field = new String[] {homeBatting.getCurData().toString(), "", "", ""};
+		JLabel homeScoreLabel = addLabel("Home Score: " + homeScore, 1,1,2,1);
+		JLabel awayScoreLabel = addLabel("Away Score: " + awayScore, 1,2,2,1);
+		JLabel inningLabel = addLabel("Inning: " + inning, 1,3,2,1);
+		JLabel outsLabel = addLabel("Outs: " + homeOuts, 1,4,2,1);
+		JLabel spaceLabel = addLabel("", 2,1,1,1);
+		JLabel homeBaseLabel = addLabel("Batting/Home Base", 3,1,1,1);
+		JLabel firstBaseLabel = addLabel("First Base", 3,2,1,1);
+		JLabel secondbaseLabel = addLabel("Second Base", 3,3,1,1);
+		JLabel thirdBaseLabel = addLabel("Third Base", 3,4,1,1);
+		JLabel homeBasePersonLabel = addLabel(field[0], 4,1,1,1);
+		JLabel firstBasePersonLabel = addLabel(field[1], 4,2,1,1);
+		JLabel secondbasePersonLabel = addLabel(field[2], 4,3,1,1);
+		JLabel thirdBasePersonLabel = addLabel(field[3], 4,4,1,1);
+		JLabel personBattingLabel = addLabel("Batting: " + field[0], 5,1,1,1);
+		homeBatButton = addButton("Bat", 5,2,1,1);
+		homeReplaceButton = addButton("Replace", 5,3,1,1);
+		JLabel reservesLabel = addLabel("Reserves Amount: " + homeReserve.size() + " Player(s)", 5,4,1,1);
+		frm.validate();
+	}
+	
+	public void homeFieldUpdate() {
+		frm.getContentPane().removeAll();
+		frm.setSize(750, 750);
+		frm.setTitle("Baseball Field Home Batting");
+		frm.repaint();
+		JLabel homeScoreLabel = addLabel("Home Score: " + homeScore, 1,1,2,1);
+		JLabel awayScoreLabel = addLabel("Away Score: " + awayScore, 1,2,2,1);
+		JLabel inningLabel = addLabel("Inning: " + inning, 1,3,2,1);
+		JLabel outsLabel = addLabel("Outs: " + homeOuts, 1,4,2,1);
+		JLabel spaceLabel = addLabel("", 2,1,1,1);
+		JLabel homeBaseLabel = addLabel("Batting/Home Base", 3,1,1,1);
+		JLabel firstBaseLabel = addLabel("First Base", 3,2,1,1);
+		JLabel secondbaseLabel = addLabel("Second Base", 3,3,1,1);
+		JLabel thirdBaseLabel = addLabel("Third Base", 3,4,1,1);
+		JLabel homeBasePersonLabel = addLabel(field[0], 4,1,1,1);
+		JLabel firstBasePersonLabel = addLabel(field[1], 4,2,1,1);
+		JLabel secondbasePersonLabel = addLabel(field[2], 4,3,1,1);
+		JLabel thirdBasePersonLabel = addLabel(field[3], 4,4,1,1);
+		JLabel personBattingLabel = addLabel("Batting: " + field[0], 5,1,1,1);
+		homeBatButton = addButton("Bat", 5,2,1,1);
+		homeReplaceButton = addButton("Replace", 5,3,1,1);
+		JLabel reservesLabel = addLabel("Reserves Amount: " + homeReserve.size() + " Player(s)", 5,4,1,1);
+		frm.validate();
+	}
 
 	public GUI() {
-//		employees.add(new Employee("e", "math", 2500));
-//		employees.add(new Employee("a", "english", 200));
-//		employees.add(new Employee("n", "science", 60));
-//		employees.add(new Employee("b", "english", 2000));
-//		employees.add(new Employee("c", "science", 600));
 		GameRules();
+		
 		awayBatting.add(new Player("a"));
 		awayBatting.add(new Player("b"));
 		awayBatting.add(new Player("c"));
@@ -244,7 +239,16 @@ public class GUI extends GBFrame {
 		awayBatting.add(new Player("e"));
 		awayBatting.add(new Player("f"));
 		awayBatting.next();
-		field[0] = awayBatting.getCurData().toString();
+		
+		homeBatting.add(new Player("aa"));
+		homeBatting.add(new Player("bb"));
+		homeBatting.add(new Player("cc"));
+		homeBatting.add(new Player("dd"));
+		homeBatting.add(new Player("ee"));
+		homeBatting.add(new Player("ff"));
+		homeBatting.next();
+//		field[0] = awayBatting.getCurData().toString();
+		
 //		updateList();
 
 	}
@@ -358,18 +362,22 @@ public class GUI extends GBFrame {
 			return;
 		} 
 		else if(buttonObj == awayBatButton) {
-			int random = rand.nextInt(6);
-			if(random == 0) {
+			int random = rand.nextInt(8);
+			if(random <= 2) {
+				awayBatting.getCurData().addOuts();
 				messageBox(awayBatting.getCurData().toString() + ": Out");
 				awayOuts++;
 				if(awayOuts == 3) {
-//					awayFieldEnd();
+					messageBox("Home Team Enters Field");
+					homeField();
+					return;
 				}
 				awayBatting.next();
 				field[0] = awayBatting.getCurData().toString();
 				awayFieldUpdate();
 			}
-			else if(random == 1) {
+			else if(random == 3) {
+				awayBatting.getCurData().addSingles();
 				messageBox(awayBatting.getCurData().toString() + ": Single");
 				if(!field[3].equals("")) awayScore++;
 				field[3] = field[2];
@@ -379,7 +387,8 @@ public class GUI extends GBFrame {
 				field[0] = awayBatting.getCurData().toString();
 				awayFieldUpdate();
 			}
-			else if(random == 2) {
+			else if(random == 4) {
+				awayBatting.getCurData().addDoubles();
 				messageBox(awayBatting.getCurData().toString() + ": Double");
 				if(!field[3].equals("")) awayScore++;
 				if(!field[2].equals("")) awayScore++;
@@ -390,7 +399,8 @@ public class GUI extends GBFrame {
 				field[0] = awayBatting.getCurData().toString();
 				awayFieldUpdate();
 			}
-			else if(random == 3) {
+			else if(random == 5) {
+				awayBatting.getCurData().addTriples();
 				messageBox(awayBatting.getCurData().toString() + ": Triple");
 				if(!field[3].equals("")) awayScore++;
 				if(!field[2].equals("")) awayScore++;
@@ -402,7 +412,8 @@ public class GUI extends GBFrame {
 				field[0] = awayBatting.getCurData().toString();
 				awayFieldUpdate();
 			}
-			else if(random == 4) {
+			else if(random == 6) {
+				awayBatting.getCurData().addWalks();
 				messageBox(awayBatting.getCurData().toString() + ": Walk");
 				if(field[1].equals("")) {
 					field[1] = field[0];
@@ -426,7 +437,8 @@ public class GUI extends GBFrame {
 				field[0] = awayBatting.getCurData().toString();
 				awayFieldUpdate();
 			}
-			else if(random == 5) {
+			else if(random == 7) {
+				awayBatting.getCurData().addHomeruns();
 				messageBox(awayBatting.getCurData().toString() + ": Homerun");
 				if(!field[3].equals("")) awayScore++;
 				if(!field[2].equals("")) awayScore++;
@@ -439,6 +451,112 @@ public class GUI extends GBFrame {
 				field[0] = awayBatting.getCurData().toString();
 				awayFieldUpdate();
 			}
+		}
+		else if(buttonObj == awayReplaceButton) {
+			if(awayReserve.size() == 0) {
+				messageBox("No Reserves");
+				return;
+			}
+			replaceAwayPlayer();
+		}
+		else if(buttonObj == homeBatButton) {
+			int random = rand.nextInt(8);
+			if(random <= 2) {
+				homeBatting.getCurData().addOuts();
+				messageBox(homeBatting.getCurData().toString() + ": Out");
+				homeOuts++;
+				if(homeOuts == 3) {
+					if(inning == innings) {
+						System.out.println("Game Over");
+						return;
+					}
+					inning++;
+					messageBox("Next Inning: Away Team Enters Field");
+					awayField();
+					return;					
+				}
+				homeBatting.next();
+				field[0] = homeBatting.getCurData().toString();
+				homeFieldUpdate();
+			}
+			else if(random == 3) {
+				homeBatting.getCurData().addSingles();
+				messageBox(homeBatting.getCurData().toString() + ": Single");
+				if(!field[3].equals("")) homeScore++;
+				field[3] = field[2];
+				field[2] = field[1];
+				field[1] = field[0];
+				homeBatting.next();
+				field[0] = homeBatting.getCurData().toString();
+				homeFieldUpdate();
+			}
+			else if(random == 4) {
+				homeBatting.getCurData().addDoubles();
+				messageBox(homeBatting.getCurData().toString() + ": Double");
+				if(!field[3].equals("")) homeScore++;
+				if(!field[2].equals("")) homeScore++;
+				field[3] = field[1];
+				field[2] = field[0];
+				field[1] = "";
+				homeBatting.next();
+				field[0] = homeBatting.getCurData().toString();
+				homeFieldUpdate();
+			}
+			else if(random == 5) {
+				homeBatting.getCurData().addTriples();
+				messageBox(homeBatting.getCurData().toString() + ": Triple");
+				if(!field[3].equals("")) homeScore++;
+				if(!field[2].equals("")) homeScore++;
+				if(!field[1].equals("")) homeScore++;
+				field[3] = field[0];
+				field[2] = "";
+				field[1] = "";
+				homeBatting.next();
+				field[0] = homeBatting.getCurData().toString();
+				homeFieldUpdate();
+			}
+			else if(random == 6) {
+				homeBatting.getCurData().addWalks();
+				messageBox(homeBatting.getCurData().toString() + ": Walk");
+				if(field[1].equals("")) {
+					field[1] = field[0];
+				}
+				else if(field[2].equals("")) {
+					field[2] = field[1];
+					field[1] = field[0];
+				}
+				else if(field[3].equals("")) {
+					field[3] = field[2];
+					field[2] = field[1];
+					field[1] = field[0];
+				}
+				else {
+					field[3] = field[2];
+					field[2] = field[1];
+					field[1] = field[0];
+					homeScore++;
+				}
+				homeBatting.next();
+				field[0] = homeBatting.getCurData().toString();
+				homeFieldUpdate();
+			}
+			else if(random == 7) {
+				homeBatting.getCurData().addHomeruns();
+				messageBox(homeBatting.getCurData().toString() + ": Homerun");
+				if(!field[3].equals("")) homeScore++;
+				if(!field[2].equals("")) homeScore++;
+				if(!field[1].equals("")) homeScore++;
+				homeScore++;
+				field[3] = "";
+				field[2] = "";
+				field[1] = "";
+				homeBatting.next();
+				field[0] = homeBatting.getCurData().toString();
+				awayFieldUpdate();
+			}
+		}
+		else if(buttonObj == homeReplaceButton) {
+			
 		}
 //		else if(buttonObj == removeButton) {
 //			if(employees.getHead() == null) {

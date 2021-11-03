@@ -84,7 +84,7 @@ public class Player {
 		this.walks = walks;
 	}
 	
-	public void adWalks() {
+	public void addWalks() {
 		walks++;
 	}
 

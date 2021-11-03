@@ -1,3 +1,5 @@
+import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
 class LinkedList<E> {
     private Node<E> head = null; 
@@ -45,6 +47,95 @@ class LinkedList<E> {
     	}
     	return null;
     }
+    
+    public ListIterator<E> iterator() {
+		return new LinkedListIterator();
+	}
+    
+    private class LinkedListIterator implements ListIterator<E> {
+		private Node<E> cur = head;
+		
+		public boolean hasNext() {
+			return cur.next != null;
+		}
+
+		public E next() {
+			cur = cur.next;
+			return cur.data;
+		}
+
+		public boolean hasPrevious() {
+			return cur.prev != null;
+		}
+
+		public E previous() {
+			if(!hasPrevious()) {
+				throw new NoSuchElementException();
+			}
+			cur = cur.prev;
+			return cur.data;
+		}
+		
+		public void set(E e) {
+			if(cur == null) {
+				throw new NoSuchElementException();
+			}
+			cur.data = e;
+		}
+
+		public void remove() {
+			if(cur == null) {
+				throw new NoSuchElementException();
+			}
+			if(cur == head && cur == tail) {
+				head = null;
+				tail = null;
+				cur = head;
+			} else if(cur == head) { 
+				head = cur.next;
+				cur = cur.next;
+				cur.prev = null;
+			} else if (cur == tail) {
+				tail = cur.prev;
+				cur = cur.prev;
+				cur.next = null;
+			} else {
+				cur.next.prev = cur.prev;
+				cur.prev.next = cur.next;
+			}
+		}
+
+		public void add(E e) {
+			Node<E> new_node = new Node<E>(e);
+			new_node.next = null;
+			new_node.prev = null;
+			if (head == null) {
+				head = new_node;
+				tail = new_node;
+				return;
+			}
+			if(cur == head) {
+				Node<E> first = head;
+				first.prev = new_node;
+				new_node.next = first;
+				head = new_node;
+				return;
+			}
+			new_node.next = cur;
+			new_node.prev = cur.prev;
+			cur.prev.next = new_node;
+			cur.prev = cur.prev.next;
+		}
+
+		public int nextIndex() {
+			return 0;
+		}
+
+		public int previousIndex() {
+			return 0;
+		}
+		
+	}
     
 //    public void printList(LinkedList list){
 //        Node currNode = list.head;
