@@ -54,14 +54,17 @@ class LinkedList<E> {
     
     private class LinkedListIterator implements ListIterator<E> {
 		private Node<E> cur = head;
+		private Node<E> lastA = head;
 		
 		public boolean hasNext() {
-			return cur.next != null;
+			return cur != null;
 		}
 
 		public E next() {
+			E data = cur.data;
+			lastA = cur;
 			cur = cur.next;
-			return cur.data;
+			return data;
 		}
 
 		public boolean hasPrevious() {
@@ -69,9 +72,6 @@ class LinkedList<E> {
 		}
 
 		public E previous() {
-			if(!hasPrevious()) {
-				throw new NoSuchElementException();
-			}
 			cur = cur.prev;
 			return cur.data;
 		}
@@ -84,47 +84,35 @@ class LinkedList<E> {
 		}
 
 		public void remove() {
-			if(cur == null) {
+			if(lastA == null) {
 				throw new NoSuchElementException();
 			}
-			if(cur == head && cur == tail) {
-				head = null;
-				tail = null;
-				cur = head;
-			} else if(cur == head) { 
-				head = cur.next;
-				cur = cur.next;
+			if (cur == null){
+				lastA.next = null;
+				lastA = null;
+			}
+			else if(lastA == head) {
+				head = cur;
 				cur.prev = null;
-			} else if (cur == tail) {
-				tail = cur.prev;
-				cur = cur.prev;
-				cur.next = null;
-			} else {
-				cur.next.prev = cur.prev;
-				cur.prev.next = cur.next;
+				lastA = null;
+			} 
+			else{
+				cur.prev = lastA.prev;
+				lastA.prev.next = cur;
+				lastA = null;
 			}
 		}
 
 		public void add(E e) {
-			Node<E> new_node = new Node<E>(e);
-			new_node.next = null;
-			new_node.prev = null;
-			if (head == null) {
-				head = new_node;
-				tail = new_node;
-				return;
-			}
-			if(cur == head) {
-				Node<E> first = head;
-				first.prev = new_node;
-				new_node.next = first;
+			Node<E> new_node = new Node<E>(e, null, null);
+			if(cur == null) {
 				head = new_node;
 				return;
 			}
-			new_node.next = cur;
-			new_node.prev = cur.prev;
-			cur.prev.next = new_node;
-			cur.prev = cur.prev.next;
+			new_node.next = lastA.next;
+			new_node.prev = lastA;
+			lastA.next = new_node;
+			new_node.next.prev = new_node;
 		}
 
 		public int nextIndex() {
@@ -133,6 +121,10 @@ class LinkedList<E> {
 
 		public int previousIndex() {
 			return 0;
+		}
+		
+		public E getLastA() {
+			return lastA.data;
 		}
 		
 	}

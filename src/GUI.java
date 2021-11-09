@@ -1,5 +1,7 @@
 import javax.swing.*;
 import BreezySwing.*;
+
+import java.util.ListIterator;
 import java.util.Random;
 
 public class GUI extends GBFrame {
@@ -14,7 +16,9 @@ public class GUI extends GBFrame {
 	String[] field = new String[] {"", "", "", ""};
 	
 //	DoublyLinkedList<Employee> employees = new DoublyLinkedList<>();
-//	ListIterator<Employee> it = employees.iterator();
+	ListIterator<Player> itAR = awayReserve.iterator();
+	ListIterator<Player> itHR = homeReserve.iterator();
+
 //	ListIterator<Employee> itEdit = employees.iterator();
 	JTextArea outputArea;
 	JButton setRuleButton;
@@ -34,8 +38,10 @@ public class GUI extends GBFrame {
 //	JButton removeEmployeeButton;
 //	JButton editInfoButton;
 //	JButton editEmployeeButton;
-//	JButton backButton;
-//	JButton backEditButton;
+	JButton backAwayButton;
+	JButton replaceAwayButton;
+	JButton backHomeButton;
+	JButton replaceHomeButton;
 //	JTextField departmentField;
 	IntegerField reserveAmountField;
 	IntegerField battingAmountField;
@@ -173,8 +179,22 @@ public class GUI extends GBFrame {
 	}
 	
 	public void replaceAwayPlayer() {
-		outputArea = addTextArea("", 1, 1, 1, 6);
-		outputArea.append
+		frm.getContentPane().removeAll();
+		frm.setSize(250, 750);
+		frm.setTitle("Replace Away Batting Player");
+		frm.repaint();
+		outputArea = addTextArea("", 1, 1, 2, 6);
+		JLabel nameLabel = addLabel("Name", 7,1,1,1);
+		nameField = addTextField("", 7,2,1,1);
+		backAwayButton = addButton("Back", 8,1,1,1);
+		replaceAwayButton = addButton("Replace", 8,2,1,1);
+		frm.validate();
+		itAR = awayReserve.iterator();
+		while(itAR.hasNext()) {
+			outputArea.append(itAR.next().toString() + "\n");
+		
+		}
+		
 	}
 	
 	public void homeField() {
@@ -239,6 +259,14 @@ public class GUI extends GBFrame {
 		awayBatting.add(new Player("e"));
 		awayBatting.add(new Player("f"));
 		awayBatting.next();
+		
+		awayReserve.add(new Player("aaa"));
+		awayReserve.add(new Player("bbb"));
+		awayReserve.add(new Player("ccc"));
+		awayReserve.add(new Player("ddd"));
+		awayReserve.add(new Player("eee"));
+		awayReserve.add(new Player("fff"));
+		
 		
 		homeBatting.add(new Player("aa"));
 		homeBatting.add(new Player("bb"));
@@ -458,6 +486,29 @@ public class GUI extends GBFrame {
 				return;
 			}
 			replaceAwayPlayer();
+		}
+		else if(buttonObj == backAwayButton) {
+			awayFieldUpdate();
+		}
+		else if(buttonObj == replaceAwayButton) {
+			String name = nameField.getText();
+			if(name.equals("")) {
+				messageBox("Error: Please Enter Name");
+				return;
+			} 
+			itAR = awayReserve.iterator();
+			while(itAR.hasNext()) {
+				Player s = itAR.next();
+				if(s.getName().equals(name)) {
+					awayBatting.setCur(s);
+					field[0] = awayBatting.getCurData().toString();
+					itAR.remove();
+					awayFieldUpdate();
+					return;
+				}
+			}
+			messageBox("Error: Player Not Found");
+			return;
 		}
 		else if(buttonObj == homeBatButton) {
 			int random = rand.nextInt(8);
