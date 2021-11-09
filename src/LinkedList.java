@@ -87,9 +87,14 @@ class LinkedList<E> {
 			if(lastA == null) {
 				throw new NoSuchElementException();
 			}
-			if (cur == null){
-				lastA.next = null;
+			if(cur == null && lastA == head) {
+				head = null;
 				lastA = null;
+			}
+			else if (cur == null){
+				lastA.prev.next = null;
+				lastA = null;
+				System.out.println("cur null");
 			}
 			else if(lastA == head) {
 				head = cur;

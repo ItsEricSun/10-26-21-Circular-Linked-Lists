@@ -16,6 +16,10 @@ public class Player {
 		return name;
 	}
 	
+	public String results() {
+		return "Name: " + name + "\nSingles: " + singles + "\nDoubles: " + doubles + "\nTriples: " + triples + "\nHomeruns: " + homeruns + "\nWalks: " + walks + "\nOuts: " + outs + "\n";
+	}
+	
 	public boolean equals(String name) {
 		return this.name.equalsIgnoreCase(name);
 	}
