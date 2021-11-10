@@ -15,11 +15,11 @@ public class GUI extends GBFrame {
 	CircularLinkedList<Player> awayBatting = new CircularLinkedList<>();
 	String[] field = new String[] {"", "", "", ""};
 	
-//	DoublyLinkedList<Employee> employees = new DoublyLinkedList<>();
 	ListIterator<Player> itAR = awayReserve.iterator();
 	ListIterator<Player> itHR = homeReserve.iterator();
+	ListIterator<Player> itAB = awayBatting.iterator();
+	ListIterator<Player> itHB = homeBatting.iterator();
 
-//	ListIterator<Employee> itEdit = employees.iterator();
 	JTextArea outputArea;
 	JTextArea outputArea2;
 	JButton setRuleButton;
@@ -31,19 +31,10 @@ public class GUI extends GBFrame {
 	JButton awayReplaceButton;
 	JButton homeBatButton;
 	JButton homeReplaceButton;
-//	JButton removeButton;
-//	JButton editButton;
-//	JButton sortNameButton;
-//	JButton sortSalaryButton;
-//	JButton addEmployeeButton;
-//	JButton removeEmployeeButton;
-//	JButton editInfoButton;
-//	JButton editEmployeeButton;
 	JButton backAwayButton;
 	JButton replaceAwayButton;
 	JButton backHomeButton;
 	JButton replaceHomeButton;
-//	JTextField departmentField;
 	IntegerField reserveAmountField;
 	IntegerField battingAmountField;
 	IntegerField inningAmountField;
@@ -61,10 +52,7 @@ public class GUI extends GBFrame {
 	int homeOuts;
 	Random rand = new Random();
 	Player p;
-
-
 	static boolean adding = true;
-//	Employee temp;
 
 	public void GameRules() {
 		JLabel reserveAmountLabel = addLabel("Max Reserve Player List Size (2-18)", 1,1,1,1);
@@ -73,12 +61,7 @@ public class GUI extends GBFrame {
 		battingAmountField = addIntegerField(6, 2,2,1,1);
 		JLabel inningAmountLabel = addLabel("Innings (2-9)", 3,1,1,1);
 		inningAmountField = addIntegerField(2, 3,2,1,1);
-//		outputArea = addTextArea("", 1, 1, 1, 6);
 		setRuleButton = addButton("Set", 3,1,2,1);
-//		removeButton = addButton("Remove Employee", 8,1,1,1);
-//		editButton = addButton("Edit Employee", 9,1,1,1);
-//		sortNameButton = addButton("Sort by Name", 10,1,1,1);
-//		sortSalaryButton = addButton("Sort by Salary", 11,1,1,1);
 	}
 
 	public void addHomeReserve() {
@@ -135,7 +118,8 @@ public class GUI extends GBFrame {
 		frm.setTitle("Baseball Field Away Batting");
 		frm.repaint();
 		awayOuts = 0;
-		field = new String[] {awayBatting.getCurData().toString(), "", "", ""};
+//		field = new String[] {awayBatting.getCurData().toString(), "", "", ""};
+		field = new String[] {itAB.next().toString(), "", "", ""};
 		JLabel homeScoreLabel = addLabel("Home Score: " + homeScore, 1,1,2,1);
 		JLabel awayScoreLabel = addLabel("Away Score: " + awayScore, 1,2,2,1);
 		JLabel inningLabel = addLabel("Inning: " + inning, 1,3,2,1);
@@ -195,9 +179,7 @@ public class GUI extends GBFrame {
 		itAR = awayReserve.iterator();
 		while(itAR.hasNext()) {
 			outputArea.append(itAR.next().toString() + "\n");
-		
 		}
-		
 	}
 	
 	public void homeField() {
@@ -206,7 +188,8 @@ public class GUI extends GBFrame {
 		frm.setTitle("Baseball Field Home Batting");
 		frm.repaint();
 		homeOuts = 0;
-		field = new String[] {homeBatting.getCurData().toString(), "", "", ""};
+//		field = new String[] {homeBatting.getCurData().toString(), "", "", ""};
+		field = new String[] {itHB.next().toString(), "", "", ""};
 		JLabel homeScoreLabel = addLabel("Home Score: " + homeScore, 1,1,2,1);
 		JLabel awayScoreLabel = addLabel("Away Score: " + awayScore, 1,2,2,1);
 		JLabel inningLabel = addLabel("Inning: " + inning, 1,3,2,1);
@@ -266,9 +249,7 @@ public class GUI extends GBFrame {
 		itHR = homeReserve.iterator();
 		while(itHR.hasNext()) {
 			outputArea.append(itHR.next().toString() + "\n");
-		
 		}
-		
 	}
 	
 	public void results() {
@@ -276,7 +257,6 @@ public class GUI extends GBFrame {
 		frm.setSize(500, 750);
 		frm.setTitle("Results");
 		frm.repaint();
-//		JLabel scoreLabel = addLabel("Score", 1,1,2,1);
 		JLabel homeScoreLabel = addLabel("Home Score: " + homeScore, 1,1,1,1);
 		JLabel awayScoreLabel = addLabel("Away Score: " + awayScore, 1,2,1,1);
 		if(homeScore > awayScore) {
@@ -306,7 +286,7 @@ public class GUI extends GBFrame {
 	public GUI() {
 		GameRules();
 		
-		/*
+		
 		p = new Player("aa");
 		awayBatting.add(p);
 		awayAll.add(p);
@@ -364,7 +344,8 @@ public class GUI extends GBFrame {
 		homeReserve.add(p);
 		homeAll.add(p);
 		homeBatting.next();
-		*/
+		itAB = awayBatting.iterator();
+		itHB = homeBatting.iterator();
 	}
 
 	public void buttonClicked(JButton buttonObj){
@@ -402,7 +383,7 @@ public class GUI extends GBFrame {
 			battingA = b;
 			innings = i;
 			addHomeReserve();
-//			awayField();
+			awayField();
 			return;
 		} 
 		else if(buttonObj == addHomeReserveButton) {
@@ -469,6 +450,8 @@ public class GUI extends GBFrame {
 			battingA--;
 			if(battingA == 0) {
 				awayBatting.next();
+				itAB = awayBatting.iterator();
+				itHB = homeBatting.iterator();
 				awayField();
 				return;
 			}
@@ -478,7 +461,8 @@ public class GUI extends GBFrame {
 		else if(buttonObj == awayBatButton) {
 			int random = rand.nextInt(8);
 			if(random <= 2) {
-				awayBatting.getCurData().addOuts();
+				itAB.previous().addOuts();
+//				awayBatting.getCurData().addOuts();
 				// TODO
 				// TODO
 				// TODO
@@ -490,35 +474,38 @@ public class GUI extends GBFrame {
 					homeField();
 					return;
 				}
-				awayBatting.next();
-				field[0] = awayBatting.getCurData().toString();
+//				awayBatting.next();
+//				field[0] = awayBatting.getCurData().toString();
+				field[0] = itAB.next().toString();
 				awayFieldUpdate();
 			}
 			else if(random == 3) {
-				awayBatting.getCurData().addSingles();
+				itAB.previous().addSingles();
 //				messageBox(awayBatting.getCurData().toString() + ": Single");
 				if(!field[3].equals("")) awayScore++;
 				field[3] = field[2];
 				field[2] = field[1];
 				field[1] = field[0];
-				awayBatting.next();
-				field[0] = awayBatting.getCurData().toString();
+//				awayBatting.next();
+//				field[0] = awayBatting.getCurData().toString();
+				field[0] = itAB.next().toString();
 				awayFieldUpdate();
 			}
 			else if(random == 4) {
-				awayBatting.getCurData().addDoubles();
+				itAB.previous().addDoubles();
 //				messageBox(awayBatting.getCurData().toString() + ": Double");
 				if(!field[3].equals("")) awayScore++;
 				if(!field[2].equals("")) awayScore++;
 				field[3] = field[1];
 				field[2] = field[0];
 				field[1] = "";
-				awayBatting.next();
-				field[0] = awayBatting.getCurData().toString();
+//				awayBatting.next();
+//				field[0] = awayBatting.getCurData().toString();
+				field[0] = itAB.next().toString();
 				awayFieldUpdate();
 			}
 			else if(random == 5) {
-				awayBatting.getCurData().addTriples();
+				itAB.previous().addTriples();
 //				messageBox(awayBatting.getCurData().toString() + ": Triple");
 				if(!field[3].equals("")) awayScore++;
 				if(!field[2].equals("")) awayScore++;
@@ -526,12 +513,13 @@ public class GUI extends GBFrame {
 				field[3] = field[0];
 				field[2] = "";
 				field[1] = "";
-				awayBatting.next();
-				field[0] = awayBatting.getCurData().toString();
+//				awayBatting.next();
+//				field[0] = awayBatting.getCurData().toString();
+				field[0] = itAB.next().toString();
 				awayFieldUpdate();
 			}
 			else if(random == 6) {
-				awayBatting.getCurData().addWalks();
+				itAB.previous().addWalks();
 //				messageBox(awayBatting.getCurData().toString() + ": Walk");
 				if(field[1].equals("")) {
 					field[1] = field[0];
@@ -551,12 +539,13 @@ public class GUI extends GBFrame {
 					field[1] = field[0];
 					awayScore++;
 				}
-				awayBatting.next();
-				field[0] = awayBatting.getCurData().toString();
+//				awayBatting.next();
+//				field[0] = awayBatting.getCurData().toString();
+				field[0] = itAB.next().toString();
 				awayFieldUpdate();
 			}
 			else if(random == 7) {
-				awayBatting.getCurData().addHomeruns();
+				itAB.previous().addHomeruns();
 //				messageBox(awayBatting.getCurData().toString() + ": Homerun");
 				if(!field[3].equals("")) awayScore++;
 				if(!field[2].equals("")) awayScore++;
@@ -565,8 +554,9 @@ public class GUI extends GBFrame {
 				field[3] = "";
 				field[2] = "";
 				field[1] = "";
-				awayBatting.next();
-				field[0] = awayBatting.getCurData().toString();
+//				awayBatting.next();
+//				field[0] = awayBatting.getCurData().toString();
+				field[0] = itAB.next().toString();
 				awayFieldUpdate();
 			}
 		}
@@ -590,8 +580,10 @@ public class GUI extends GBFrame {
 			while(itAR.hasNext()) {
 				Player s = itAR.next();
 				if(s.getName().equals(name)) {
-					awayBatting.setCur(s);
-					field[0] = awayBatting.getCurData().toString();
+					itAB.set(s);
+//					awayBatting.setCur(s);
+//					field[0] = awayBatting.getCurData().toString();
+					field[0] = itAB.previous().toString();
 					itAR.remove();
 					awayFieldUpdate();
 					return;

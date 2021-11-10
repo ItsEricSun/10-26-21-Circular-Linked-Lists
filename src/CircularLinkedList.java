@@ -1,3 +1,6 @@
+import java.util.ListIterator;
+import java.util.NoSuchElementException;
+
 public class CircularLinkedList<E> {
 	private Node<E> head = null; 
 	private Node<E> cur = null;
@@ -79,12 +82,95 @@ public class CircularLinkedList<E> {
 	public static void main(String[] args) {
 		CircularLinkedList<Player> l = new CircularLinkedList<>();
 		l.add(new Player("A"));
-//		System.out.println(l.getCur());
-//		l.printList();
 		l.add(new Player("C"));
 		l.add(new Player("B"));
-		l.next();
-		System.out.println(l.getCurData().toString());
+		ListIterator<Player> i = l.iterator();
+		System.out.println(i.next().toString());
+		System.out.println(i.next().toString());
+		System.out.println(i.next().toString());
+		i.set(new Player("D"));
+		System.out.println(i.previous().toString());
+		System.out.println(i.next().toString());
+		System.out.println(i.previous().toString());
+//		System.out.println(l.getCurData().toString());
 //		l.printList();
+	}
+	
+	public ListIterator<E> iterator() {
+		return new CircularlyLinkedListIterator();
+	}
+	
+	private class CircularlyLinkedListIterator implements ListIterator<E> {
+		private Node<E> cur = head;
+		private Node<E> lastA = null;
+		
+		public boolean hasNext() {
+			return true;
+		}
+
+		public E next() {
+			E data = cur.data;
+			lastA = cur;
+			cur = cur.next;
+			return data;
+		}
+
+		public boolean hasPrevious() {
+			return false;
+		}
+
+		public E previous() {
+			return lastA.data;
+		}
+		
+		public void set(E e) {
+			if(cur == null) {
+				throw new NoSuchElementException();
+			}
+			lastA.data = e;
+		}
+
+		public void remove() {
+			if(cur == null) {
+				throw new NoSuchElementException();
+			}
+			if(cur == head) {
+				head = null;
+				cur = head;
+			} else if(lastA == head) { 
+				lastA.next = lastA;
+				cur = lastA;
+				head = lastA;
+			} else {
+				Node<E> cur2 = head;
+				while(cur2.next != lastA) {
+					cur2 = cur2.next;
+				}
+				cur2.next = cur;
+			}
+		}
+
+		public void add(E e) {
+			Node<E> new_node = new Node<E>(e);
+			if(head == null) {
+				head = new_node;
+				new_node.next = head;
+				cur = head;
+			} else {
+				lastA.next = new_node;
+				new_node.next = cur;
+				lastA = lastA.next;
+				cur = cur.next;
+			}
+		}
+
+		public int nextIndex() {
+			return 0;
+		}
+
+		public int previousIndex() {
+			return 0;
+		}
+		
 	}
 }
