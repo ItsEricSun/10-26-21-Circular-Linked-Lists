@@ -4,24 +4,24 @@ import java.util.NoSuchElementException;
 public class CircularLinkedList<E> {
 	private Node<E> head = null; 
 	private Node<E> cur = null;
-	
+
 	private class Node<E> {
 		E data;
 		Node<E> next;
 		Node(E d) { 
 			data = d; 
 		}
-		
+
 		Node(E d, Node<E> next){
 			data = d;
 			this.next = next;
 		}
-		
+
 		E getData() {
 			return data;
 		}
 	}
-	
+
 	public void add(E data){
 		Node<E> new_node = new Node<E>(data);
 		if(head == null) {
@@ -33,23 +33,23 @@ public class CircularLinkedList<E> {
 		new_node.next = head;
 		cur = cur.next;
 	}
-	
+
 	public Node<E> getHead() {
 		return head;
 	}
-	
+
 	public Node<E> getCur() {
 		return cur;
 	}
-	
+
 	public E getCurData() {
 		return cur.data;
 	}
-	
+
 	public void setCur(E data) {
 		cur.data = data;
 	}
-	
+
 	public void next() {
 		cur = cur.next;
 	}
@@ -78,32 +78,15 @@ public class CircularLinkedList<E> {
 		}
 		return i;
 	}
-	
-	public static void main(String[] args) {
-		CircularLinkedList<Player> l = new CircularLinkedList<>();
-		l.add(new Player("A"));
-		l.add(new Player("C"));
-		l.add(new Player("B"));
-		ListIterator<Player> i = l.iterator();
-		System.out.println(i.next().toString());
-		System.out.println(i.next().toString());
-		System.out.println(i.next().toString());
-		i.set(new Player("D"));
-		System.out.println(i.previous().toString());
-		System.out.println(i.next().toString());
-		System.out.println(i.previous().toString());
-//		System.out.println(l.getCurData().toString());
-//		l.printList();
-	}
-	
+
 	public ListIterator<E> iterator() {
 		return new CircularlyLinkedListIterator();
 	}
-	
+
 	private class CircularlyLinkedListIterator implements ListIterator<E> {
 		private Node<E> cur = head;
 		private Node<E> lastA = null;
-		
+
 		public boolean hasNext() {
 			return true;
 		}
@@ -122,7 +105,7 @@ public class CircularLinkedList<E> {
 		public E previous() {
 			return lastA.data;
 		}
-		
+
 		public void set(E e) {
 			if(cur == null) {
 				throw new NoSuchElementException();
@@ -171,6 +154,5 @@ public class CircularLinkedList<E> {
 		public int previousIndex() {
 			return 0;
 		}
-		
 	}
 }

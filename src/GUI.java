@@ -14,7 +14,7 @@ public class GUI extends GBFrame {
 	CircularLinkedList<Player> homeBatting = new CircularLinkedList<>();
 	CircularLinkedList<Player> awayBatting = new CircularLinkedList<>();
 	String[] field = new String[] {"", "", "", ""};
-	
+
 	ListIterator<Player> itAR = awayReserve.iterator();
 	ListIterator<Player> itHR = homeReserve.iterator();
 	ListIterator<Player> itAB = awayBatting.iterator();
@@ -75,7 +75,7 @@ public class GUI extends GBFrame {
 		addHomeReserveButton = addButton("Add", 3,1,2,1);
 		frm.validate();
 	}
-	
+
 	public void addHomeBatting() {
 		frm.getContentPane().removeAll();
 		frm.setSize(300, 250);
@@ -87,7 +87,7 @@ public class GUI extends GBFrame {
 		addHomeBattingButton = addButton("Add", 3,1,2,1);
 		frm.validate();
 	}
-	
+
 	public void addAwayReserve() {
 		frm.getContentPane().removeAll();
 		frm.setSize(300, 250);
@@ -99,7 +99,7 @@ public class GUI extends GBFrame {
 		addAwayReserveButton = addButton("Add", 3,1,2,1);
 		frm.validate();
 	}
-	
+
 	public void addAwayBatting() {
 		frm.getContentPane().removeAll();
 		frm.setSize(300, 250);
@@ -111,14 +111,13 @@ public class GUI extends GBFrame {
 		addAwayBattingButton = addButton("Add", 3,1,2,1);
 		frm.validate();
 	}
-	
+
 	public void awayField() {
 		frm.getContentPane().removeAll();
 		frm.setSize(750, 750);
 		frm.setTitle("Baseball Field Away Batting");
 		frm.repaint();
 		awayOuts = 0;
-//		field = new String[] {awayBatting.getCurData().toString(), "", "", ""};
 		field = new String[] {itAB.next().toString(), "", "", ""};
 		JLabel homeScoreLabel = addLabel("Home Score: " + homeScore, 1,1,2,1);
 		JLabel awayScoreLabel = addLabel("Away Score: " + awayScore, 1,2,2,1);
@@ -139,7 +138,7 @@ public class GUI extends GBFrame {
 		JLabel reservesLabel = addLabel("Reserves Amount: " + awayReserve.size() + " Player(s)", 5,4,1,1);
 		frm.validate();
 	}
-	
+
 	public void awayFieldUpdate() {
 		frm.getContentPane().removeAll();
 		frm.setSize(750, 750);
@@ -164,7 +163,7 @@ public class GUI extends GBFrame {
 		JLabel reservesLabel = addLabel("Reserves Amount: " + awayReserve.size() + " Player(s)", 5,4,1,1);
 		frm.validate();
 	}
-	
+
 	public void replaceAwayPlayer() {
 		frm.getContentPane().removeAll();
 		frm.setSize(500, 750);
@@ -181,14 +180,13 @@ public class GUI extends GBFrame {
 			outputArea.append(itAR.next().toString() + "\n");
 		}
 	}
-	
+
 	public void homeField() {
 		frm.getContentPane().removeAll();
 		frm.setSize(750, 750);
 		frm.setTitle("Baseball Field Home Batting");
 		frm.repaint();
 		homeOuts = 0;
-//		field = new String[] {homeBatting.getCurData().toString(), "", "", ""};
 		field = new String[] {itHB.next().toString(), "", "", ""};
 		JLabel homeScoreLabel = addLabel("Home Score: " + homeScore, 1,1,2,1);
 		JLabel awayScoreLabel = addLabel("Away Score: " + awayScore, 1,2,2,1);
@@ -209,7 +207,7 @@ public class GUI extends GBFrame {
 		JLabel reservesLabel = addLabel("Reserves Amount: " + homeReserve.size() + " Player(s)", 5,4,1,1);
 		frm.validate();
 	}
-	
+
 	public void homeFieldUpdate() {
 		frm.getContentPane().removeAll();
 		frm.setSize(750, 750);
@@ -234,7 +232,7 @@ public class GUI extends GBFrame {
 		JLabel reservesLabel = addLabel("Reserves Amount: " + homeReserve.size() + " Player(s)", 5,4,1,1);
 		frm.validate();
 	}
-	
+
 	public void replaceHomePlayer() {
 		frm.getContentPane().removeAll();
 		frm.setSize(500, 750);
@@ -251,7 +249,7 @@ public class GUI extends GBFrame {
 			outputArea.append(itHR.next().toString() + "\n");
 		}
 	}
-	
+
 	public void results() {
 		frm.getContentPane().removeAll();
 		frm.setSize(500, 750);
@@ -285,67 +283,6 @@ public class GUI extends GBFrame {
 
 	public GUI() {
 		GameRules();
-		
-		
-		p = new Player("aa");
-		awayBatting.add(p);
-		awayAll.add(p);
-		p = new Player("ab");
-		awayBatting.add(p);
-		awayAll.add(p);
-		p = new Player("ac");
-		awayBatting.add(p);
-		awayAll.add(p);
-		p = new Player("ad");
-		awayBatting.add(p);
-		awayAll.add(p);
-		p = new Player("ae");
-		awayBatting.add(p);
-		awayAll.add(p);
-		p = new Player("af");
-		awayBatting.add(p);
-		awayAll.add(p);
-		p = new Player("aar");
-		awayReserve.add(p);
-		awayAll.add(p);
-		p = new Player("abr");
-		awayReserve.add(p);
-		awayAll.add(p);
-		p = new Player("acr");
-		awayReserve.add(p);
-		awayAll.add(p);
-		awayBatting.next();
-		
-		p = new Player("ha");
-		homeBatting.add(p);
-		homeAll.add(p);
-		p = new Player("hb");
-		homeBatting.add(p);
-		homeAll.add(p);
-		p = new Player("hc");
-		homeBatting.add(p);
-		homeAll.add(p);
-		p = new Player("hd");
-		homeBatting.add(p);
-		homeAll.add(p);
-		p = new Player("he");
-		homeBatting.add(p);
-		homeAll.add(p);
-		p = new Player("hf");
-		homeBatting.add(p);
-		homeAll.add(p);
-		p = new Player("har");
-		homeReserve.add(p);
-		homeAll.add(p);
-		p = new Player("hbr");
-		homeReserve.add(p);
-		homeAll.add(p);
-		p = new Player("hcr");
-		homeReserve.add(p);
-		homeAll.add(p);
-		homeBatting.next();
-		itAB = awayBatting.iterator();
-		itHB = homeBatting.iterator();
 	}
 
 	public void buttonClicked(JButton buttonObj){
@@ -383,7 +320,6 @@ public class GUI extends GBFrame {
 			battingA = b;
 			innings = i;
 			addHomeReserve();
-			awayField();
 			return;
 		} 
 		else if(buttonObj == addHomeReserveButton) {
@@ -462,65 +398,52 @@ public class GUI extends GBFrame {
 			int random = rand.nextInt(8);
 			if(random <= 2) {
 				itAB.previous().addOuts();
-//				awayBatting.getCurData().addOuts();
-				// TODO
-				// TODO
-				// TODO
-				// TODO
-//				messageBox(awayBatting.getCurData().toString() + ": Out");
+				messageBox(itAB.previous().toString() + ": Out");
 				awayOuts++;
 				if(awayOuts == 3) {
 					messageBox("Home Team Enters Field");
 					homeField();
 					return;
 				}
-//				awayBatting.next();
-//				field[0] = awayBatting.getCurData().toString();
 				field[0] = itAB.next().toString();
 				awayFieldUpdate();
 			}
 			else if(random == 3) {
 				itAB.previous().addSingles();
-//				messageBox(awayBatting.getCurData().toString() + ": Single");
+				messageBox(itAB.previous().toString() + ": Single");
 				if(!field[3].equals("")) awayScore++;
 				field[3] = field[2];
 				field[2] = field[1];
 				field[1] = field[0];
-//				awayBatting.next();
-//				field[0] = awayBatting.getCurData().toString();
 				field[0] = itAB.next().toString();
 				awayFieldUpdate();
 			}
 			else if(random == 4) {
 				itAB.previous().addDoubles();
-//				messageBox(awayBatting.getCurData().toString() + ": Double");
+				messageBox(itAB.previous().toString() + ": Double");
 				if(!field[3].equals("")) awayScore++;
 				if(!field[2].equals("")) awayScore++;
 				field[3] = field[1];
 				field[2] = field[0];
 				field[1] = "";
-//				awayBatting.next();
-//				field[0] = awayBatting.getCurData().toString();
 				field[0] = itAB.next().toString();
 				awayFieldUpdate();
 			}
 			else if(random == 5) {
 				itAB.previous().addTriples();
-//				messageBox(awayBatting.getCurData().toString() + ": Triple");
+				messageBox(itAB.previous().toString() + ": Triple");
 				if(!field[3].equals("")) awayScore++;
 				if(!field[2].equals("")) awayScore++;
 				if(!field[1].equals("")) awayScore++;
 				field[3] = field[0];
 				field[2] = "";
 				field[1] = "";
-//				awayBatting.next();
-//				field[0] = awayBatting.getCurData().toString();
 				field[0] = itAB.next().toString();
 				awayFieldUpdate();
 			}
 			else if(random == 6) {
 				itAB.previous().addWalks();
-//				messageBox(awayBatting.getCurData().toString() + ": Walk");
+				messageBox(itAB.previous().toString() + ": Walk");
 				if(field[1].equals("")) {
 					field[1] = field[0];
 				}
@@ -539,14 +462,12 @@ public class GUI extends GBFrame {
 					field[1] = field[0];
 					awayScore++;
 				}
-//				awayBatting.next();
-//				field[0] = awayBatting.getCurData().toString();
 				field[0] = itAB.next().toString();
 				awayFieldUpdate();
 			}
 			else if(random == 7) {
 				itAB.previous().addHomeruns();
-//				messageBox(awayBatting.getCurData().toString() + ": Homerun");
+				messageBox(itAB.previous().toString() + ": Homerun");
 				if(!field[3].equals("")) awayScore++;
 				if(!field[2].equals("")) awayScore++;
 				if(!field[1].equals("")) awayScore++;
@@ -554,8 +475,6 @@ public class GUI extends GBFrame {
 				field[3] = "";
 				field[2] = "";
 				field[1] = "";
-//				awayBatting.next();
-//				field[0] = awayBatting.getCurData().toString();
 				field[0] = itAB.next().toString();
 				awayFieldUpdate();
 			}
@@ -581,8 +500,6 @@ public class GUI extends GBFrame {
 				Player s = itAR.next();
 				if(s.getName().equals(name)) {
 					itAB.set(s);
-//					awayBatting.setCur(s);
-//					field[0] = awayBatting.getCurData().toString();
 					field[0] = itAB.previous().toString();
 					itAR.remove();
 					awayFieldUpdate();
@@ -595,8 +512,8 @@ public class GUI extends GBFrame {
 		else if(buttonObj == homeBatButton) {
 			int random = rand.nextInt(8);
 			if(random <= 2) {
-				homeBatting.getCurData().addOuts();
-//				messageBox(homeBatting.getCurData().toString() + ": Out");
+				itHB.previous().addOuts();
+				messageBox(itHB.previous().toString() + ": Out");
 				homeOuts++;
 				if(homeOuts == 3) {
 					if(inning == innings) {
@@ -609,49 +526,45 @@ public class GUI extends GBFrame {
 					awayField();
 					return;					
 				}
-				homeBatting.next();
-				field[0] = homeBatting.getCurData().toString();
+				field[0] = itHB.next().toString();
 				homeFieldUpdate();
 			}
 			else if(random == 3) {
-				homeBatting.getCurData().addSingles();
-//				messageBox(homeBatting.getCurData().toString() + ": Single");
+				itHB.previous().addSingles();
+				messageBox(itHB.previous().toString() + ": Single");
 				if(!field[3].equals("")) homeScore++;
 				field[3] = field[2];
 				field[2] = field[1];
 				field[1] = field[0];
-				homeBatting.next();
-				field[0] = homeBatting.getCurData().toString();
+				field[0] = itHB.next().toString();
 				homeFieldUpdate();
 			}
 			else if(random == 4) {
-				homeBatting.getCurData().addDoubles();
-//				messageBox(homeBatting.getCurData().toString() + ": Double");
+				itHB.previous().addDoubles();
+				messageBox(itHB.previous().toString() + ": Double");
 				if(!field[3].equals("")) homeScore++;
 				if(!field[2].equals("")) homeScore++;
 				field[3] = field[1];
 				field[2] = field[0];
 				field[1] = "";
-				homeBatting.next();
-				field[0] = homeBatting.getCurData().toString();
+				field[0] = itHB.next().toString();
 				homeFieldUpdate();
 			}
 			else if(random == 5) {
-				homeBatting.getCurData().addTriples();
-//				messageBox(homeBatting.getCurData().toString() + ": Triple");
+				itHB.previous().addTriples();
+				messageBox(itHB.previous().toString() + ": Triple");
 				if(!field[3].equals("")) homeScore++;
 				if(!field[2].equals("")) homeScore++;
 				if(!field[1].equals("")) homeScore++;
 				field[3] = field[0];
 				field[2] = "";
 				field[1] = "";
-				homeBatting.next();
-				field[0] = homeBatting.getCurData().toString();
+				field[0] = itHB.next().toString();
 				homeFieldUpdate();
 			}
 			else if(random == 6) {
-				homeBatting.getCurData().addWalks();
-//				messageBox(homeBatting.getCurData().toString() + ": Walk");
+				itHB.previous().addWalks();
+				messageBox(itHB.previous().toString() + ": Walk");
 				if(field[1].equals("")) {
 					field[1] = field[0];
 				}
@@ -670,13 +583,12 @@ public class GUI extends GBFrame {
 					field[1] = field[0];
 					homeScore++;
 				}
-				homeBatting.next();
-				field[0] = homeBatting.getCurData().toString();
+				field[0] = itHB.next().toString();
 				homeFieldUpdate();
 			}
 			else if(random == 7) {
-				homeBatting.getCurData().addHomeruns();
-//				messageBox(homeBatting.getCurData().toString() + ": Homerun");
+				itHB.previous().addHomeruns();
+				messageBox(itHB.previous().toString() + ": Homerun");
 				if(!field[3].equals("")) homeScore++;
 				if(!field[2].equals("")) homeScore++;
 				if(!field[1].equals("")) homeScore++;
@@ -684,8 +596,7 @@ public class GUI extends GBFrame {
 				field[3] = "";
 				field[2] = "";
 				field[1] = "";
-				homeBatting.next();
-				field[0] = homeBatting.getCurData().toString();
+				field[0] = itHB.next().toString();
 				homeFieldUpdate();
 			}
 		}
@@ -709,8 +620,8 @@ public class GUI extends GBFrame {
 			while(itHR.hasNext()) {
 				Player s = itHR.next();
 				if(s.getName().equals(name)) {
-					homeBatting.setCur(s);
-					field[0] = homeBatting.getCurData().toString();
+					itHB.set(s);
+					field[0] = itHB.previous().toString();
 					itHR.remove();
 					homeFieldUpdate();
 					return;
@@ -719,32 +630,12 @@ public class GUI extends GBFrame {
 			messageBox("Error: Player Not Found");
 			return;
 		}
-//		else if(buttonObj == removeButton) {
-//			if(employees.getHead() == null) {
-//				messageBox("Error: No Employees");
-//				return;
-//			}
-//			removeMenu();
-//			return;
-//		} 
 	}
-
-//	public void updateList() {
-//		if(employees.getHead() == null) {
-//			outputArea.append ("No Employees");
-//		} else {
-//			it = employees.iterator();
-//			while(it.hasNext()) {
-//				outputArea.append(it.next().toString());
-//			}
-//		}
-//	}
 
 	public static void main(String[] args) {
 		frm = new GUI();
 		frm.setTitle("Game Rules");
 		frm.setSize(300, 250);
 		frm.setVisible(true);
-		
 	}
 }
